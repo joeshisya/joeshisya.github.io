@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Battery Finder</title>
   <style>
     body {
@@ -61,10 +60,7 @@
 
   <label for="make">Car Make</label>
   <select id="make">
-    <option value="">-- Select Make --</option>
-    <option value="Toyota">Toyota</option>
-    <option value="Honda">Honda</option>
-    <option value="Nissan">Nissan</option>
+    <option value="">-- Loading Makes... --</option>
   </select>
 
   <label for="model">Car Model</label>
@@ -85,6 +81,12 @@
   </div>
 
   <script>
+    const makeSelect = document.getElementById("make");
+    const modelSelect = document.getElementById("model");
+    const yearSelect = document.getElementById("year");
+    const batteryInfo = document.getElementById("battery-info");
+    const resultBox = document.getElementById("result");
+
     const data = {
       "Toyota": {
         "Corolla": {
@@ -113,11 +115,21 @@
       }
     };
 
-    const makeSelect = document.getElementById("make");
-    const modelSelect = document.getElementById("model");
-    const yearSelect = document.getElementById("year");
-    const batteryInfo = document.getElementById("battery-info");
-    const resultBox = document.getElementById("result");
+    // Fetch car makes from API on page load
+    window.onload = async () => {
+      try {
+        const res = await fetch("http://41.139.158.69:8000/prod/api/battery-finder/car-makes");
+        const makes = await res.json();
+
+        makeSelect.innerHTML = '<option value="">-- Select Make --</option>';
+        makes.forEach(make => {
+          makeSelect.innerHTML += `<option value="${make}">${make}</option>`;
+        });
+      } catch (error) {
+        console.error("Failed to fetch car makes:", error);
+        makeSelect.innerHTML = '<option value="">-- Failed to load makes --</option>';
+      }
+    };
 
     makeSelect.addEventListener("change", () => {
       const make = makeSelect.value;
@@ -160,7 +172,7 @@
         return;
       }
 
-      const battery = data[make][model][year] || "No data available";
+      const battery = data[make]?.[model]?.[year] || "No data available";
       batteryInfo.textContent = `${make} ${model} (${year}): ${battery}`;
       resultBox.style.display = "block";
     }
