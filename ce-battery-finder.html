@@ -6,7 +6,7 @@
   <title>Battery Finder</title>
 <style>
   body {
-    max-width: 50%;
+    max-width: 600px;
     margin: 0 auto;
     background: #FFFFFF00;
 }
@@ -154,7 +154,7 @@ function addYearChangeListener() {
 }
 
 async function fetchCarMakes(){
-    return fetch("/prod/api/battery-finder/car-makes")
+    return fetch("http://41.139.158.69:8000/api/battery-finder/car-makes")
         .then(res => res.json())
         .then(resultJson => {
             makeSelect.innerHTML = '';
@@ -200,7 +200,7 @@ async function fetchCarModels(make) {
         return;
     }
 
-    return fetch(`/prod/api/battery-finder/car-models?car_make=${make}`) 
+    return fetch(`http://41.139.158.69:8000/api/battery-finder/car-models?car_make=${make}`) 
         .then(res => res.json())
         .then(resultJson => {
             modelSelect.innerHTML = '';
@@ -247,7 +247,7 @@ async function fetchYears(make, model) {
         return;
     }       
 
-    return fetch(`/prod/api/battery-finder/years-of-manufacture?car_make=${make}&car_model=${model}`)
+    return fetch(`http://41.139.158.69:8000/api/battery-finder/years-of-manufacture?car_make=${make}&car_model=${model}`)
         .then(res => res.json())
         .then(resultJson => {
             yearSelect.innerHTML = '';
@@ -290,7 +290,7 @@ async function fetchRecommendedBattery(make, model, year) {
         batteryInfo.textContent = "Please select make, model, and year.";
         return;
     }
-    return fetch(`/prod/api/battery-finder/recommended-battery?car_make=${make}&car_model=${model}&year_of_manufacture=${year}`)
+    return fetch(`http://41.139.158.69:8000/api/battery-finder/recommended-battery?car_make=${make}&car_model=${model}&year_of_manufacture=${year}`)
         .then(res => res.json())
         .then(resultJson => {
             console.log("Recommended batteries fetched:", resultJson);
