@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = '1253';
+const key = '1254';
 
 window.onload = async () => {
     console.log(key)
