@@ -9,10 +9,11 @@ const recommendedBatteries = {
 };
 
 window.onload = async () => {
-    console.log('1251')
+    console.log('1252')
     addEventListeners();
     let rows = await fetchData();
     batteryFinderData = processCSV(rows);
+    showCarMakes();
 };
 
 async function fetchData(){
