@@ -20,15 +20,15 @@
 <select id="year" disabled> </select>
 
 <!-- Battery Popup -->
-<div id="battery-popup" class="product-popup hidden">
-  <div class="popup-overlay" onclick="closeBatteryPopup()"></div>
+<div id="product-popup" class="product-popup hidden">
+  <div class="popup-overlay" onclick="closeProductPopup()"></div>
 
   <div class="popup-box">
-    <span class="close-btn" onclick="closeBatteryPopup()">&times;</span>
+    <span class="close-btn" onclick="closeProductPopup()">&times;</span>
 
     <div class="popup-content">
       <div class="popup-image">
-        <img src="static/images/battery-placeholder.png" alt="Battery Image" id="popup-image">
+        <img src="static/images/temp.jpg" alt="Battery Image" id="popup-image">
       </div>
 
       <div class="popup-details">
@@ -37,14 +37,14 @@
         <p class="popup-tax-note">Excluding Sales Tax</p>
         <p class="popup-sku">SKU: <span id="popup-sku">DIN55MF-001</span></p>
 
-        <label for="popup-qty">Quantity *</label>
+        <!-- <label for="popup-qty">Quantity *</label>
         <div class="popup-quantity">
           <button onclick="decreaseQty()">−</button>
           <input type="number" id="popup-qty" value="1" min="1">
           <button onclick="increaseQty()">+</button>
-        </div>
+        </div> -->
 
-        <button class="popup-cart-btn">Add to Cart</button>
+        <!-- <button class="popup-cart-btn">Add to Cart</button> -->
         <p><a href="#" id="popup-details-link">View More Details</a></p>
       </div>
     </div>

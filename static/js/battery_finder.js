@@ -144,13 +144,9 @@ function showResult(batteryList) {
     document.getElementById("popup-title").textContent = battery;
     document.getElementById("popup-price").textContent = "Ksh 8,000.00"; // Dummy
     document.getElementById("popup-sku").textContent = battery.replace(/\s/g, '').toUpperCase() + "-001";
-    document.getElementById("popup-qty").value = 1;
+    // document.getElementById("popup-qty").value = 1;
 
-    document.getElementById("battery-popup").classList.remove("hidden");
-}
-
-function closePopup() {
-    document.getElementById("result").classList.add("hidden");
+    document.getElementById("product-popup").classList.remove("hidden");
 }
 
 function increaseQty() {
@@ -181,10 +177,8 @@ function addMakeChangeListener() {
         const make = makeSelect.value;
         console.log("Make changed to:", make);
         await showCarModels(make);
-        modelSelect.value = ""; // Reset model selection
-        yearSelect.value = ""; // Reset year selection
-        batteryInfo.textContent = ""; // Clear battery info
-        resultBox.style.display = "none"; // Hide result box
+        modelSelect.value = "";
+        yearSelect.value = "";
     });
 }
 
@@ -198,9 +192,8 @@ function addModelChangeListener() {
             showYears(make, model);
         } else {
             yearSelect.innerHTML = '';
-            yearSelect.disabled = true; // Disable year selection
-            batteryInfo.textContent = ""; // Clear battery info
-            resultBox.style.display = "none"; // Hide result box
+            yearSelect.disabled = true;
+            batteryInfo.textContent = "";
         }
     });
 }
@@ -216,8 +209,7 @@ function addYearChangeListener() {
             showRecommendedBattery(make, model, year);
         } else {
             console.log("Incomplete selection, clearing battery info.");
-            batteryInfo.textContent = ""; // Clear battery info
-            resultBox.style.display = "none"; // Hide result box
+            batteryInfo.textContent = "";
         }
     });
 }

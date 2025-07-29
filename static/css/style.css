@@ -15,7 +15,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #1f4cb0;
+    color: #1f3ab0;
     margin: auto;
 }
 
@@ -30,7 +30,7 @@ select {
     padding: 0.5rem;
     font-size: 1rem;
     margin-top: 0.25rem;
-    border: 2px solid #1f4cb0;
+    border: 2px solid #b01f1f;
     border-radius: 5px;
 }
 
@@ -102,8 +102,9 @@ select {
   background: white;
   display: flex;
   flex-direction: column;
-  max-width: 900px;
-  width: 90%;
+  max-width: 600px;
+  width: 60%;
+  height: 350px;
   z-index: 1000;
   padding: 2rem;
   border-radius: 8px;
@@ -139,11 +140,12 @@ select {
 .popup-details h2 {
   font-size: 24px;
   margin-bottom: 10px;
+  font-weight: normal;
 }
 
 .popup-price {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: normal;
   margin-bottom: 4px;
 }
 
@@ -186,4 +188,8 @@ select {
 
 .popup-cart-btn:hover {
   background-color: #3f4f7e;
+}
+
+.popup-image{
+  width: 50%;
 }
