@@ -64,8 +64,19 @@ function processCSV(rows) {
 async function showCarMakes(){
     const makes = Object.keys(batteryFinderData).sort();
     console.log(`${key}: makes => ${JSON.stringify(makes)}`);
-    makeSelect.innerHTML = `<option value="">Select Make</option>` + 
-        makes.map(make => `<option value="${make}">${make}</option>`).join("");
+    makeSelect.innerHTML = ''; // Clear existing options
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select Make';
+    makeSelect.appendChild(defaultOption);
+
+    makes.forEach(make => {
+        const option = document.createElement('option');
+        option.value = make;
+        option.text = make;
+        makeSelect.appendChild(option);
+    });
     
     modelSelect.innerHTML = '<option value="">Select Model</option>';
     yearSelect.innerHTML = '<option value="">Select Year</option>';
@@ -94,6 +105,24 @@ async function showYears(make, model) {
         years.map(year => `<option value="${year}">${year}</option>`).join("");
 
     yearSelect.disabled = false;
+}
+
+function populateSelect(selectElement, optionsArray, defaultText = 'Select') {
+    selectElement.innerHTML = ''; // Clear previous options
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = defaultText;
+    selectElement.appendChild(defaultOption);
+
+    optionsArray.forEach(optionValue => {
+        const option = document.createElement('option');
+        option.value = optionValue;
+        option.text = optionValue;
+        selectElement.appendChild(option);
+    });
+
+    selectElement.disabled = optionsArray.length === 0;
 }
 
 
