@@ -133,19 +133,24 @@ function showRecommendedBattery(make, model, year) {
 
 
 function showResult(batteryList) {
+    const batteryInfo = document.getElementById("battery-info");
+    const resultBox = document.getElementById("result");
+
     if (!batteryList || batteryList.length === 0) {
         batteryInfo.textContent = "No recommended batteries found.";
-        return;
+    } else {
+        batteryInfo.innerHTML = batteryList.map(battery => {
+            return `<div class="battery-item"><h4>${battery}</h4></div>`;
+        }).join("");
     }
 
-    batteryInfo.innerHTML = batteryList.map(battery => {
-        return `<div class="battery-item">
-            <h4>${battery}</h4>
-        </div>`;
-    }).join("");
-
-    resultBox.style.display = "block";
+    resultBox.classList.remove("hidden");
 }
+
+function closePopup() {
+    document.getElementById("result").classList.add("hidden");
+}
+
 
 
 
