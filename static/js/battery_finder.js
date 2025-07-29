@@ -142,8 +142,8 @@ function showResult(batteryList) {
     const battery = batteryList[0];
 
     document.getElementById("popup-title").textContent = battery;
-    document.getElementById("popup-price").textContent = "Ksh 8,000.00"; // Dummy
-    document.getElementById("popup-sku").textContent = battery.replace(/\s/g, '').toUpperCase() + "-001";
+    document.getElementById("popup-price").textContent = "";
+    document.getElementById("popup-sku").textContent = "";
     // document.getElementById("popup-qty").value = 1;
 
     document.getElementById("product-popup").classList.remove("hidden");
