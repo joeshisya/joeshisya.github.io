@@ -75,7 +75,6 @@ function processCSV(rows) {
 
 async function showCarMakes(){
     const makes = Object.keys(batteryFinderData).sort();
-    console.log(`${key}: makes => ${JSON.stringify(makes)}`);
     makeSelect.innerHTML = ''; // Clear existing options
 
     const defaultOption = document.createElement('option');
