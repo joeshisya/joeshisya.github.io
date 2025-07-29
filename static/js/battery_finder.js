@@ -9,6 +9,7 @@ const recommendedBatteries = {
 };
 
 window.onload = async () => {
+    console.log('1251')
     addEventListeners();
     let rows = await fetchData();
     batteryFinderData = processCSV(rows);
@@ -21,7 +22,6 @@ async function fetchData(){
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const csvText = await response.text();
-        console.log('CSV contents:', csvText);
 
         const rows = csvText.trim().split('\n').map(row => row.split(','));
 
