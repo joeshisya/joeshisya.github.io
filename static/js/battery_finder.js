@@ -7,9 +7,10 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
+const key = '1253';
 
 window.onload = async () => {
-    console.log('1252')
+    console.log(key)
     addEventListeners();
     let rows = await fetchData();
     batteryFinderData = processCSV(rows);
@@ -62,6 +63,7 @@ function processCSV(rows) {
 
 async function showCarMakes(){
     const makes = Object.keys(batteryFinderData).sort();
+    console.log(`${key}: makes => ${JSON.stringify(makes)}`);
     makeSelect.innerHTML = `<option value="">Select Make</option>` + 
         makes.map(make => `<option value="${make}">${make}</option>`).join("");
     
