@@ -1,3 +1,4 @@
+let DATA = {};
 const makeSelect = document.getElementById("make");
 const modelSelect = document.getElementById("model");
 const yearSelect = document.getElementById("year");
@@ -9,7 +10,9 @@ const recommendedBatteries = {
 
 window.onload = async () => {
     addEventListeners();
-    await fetchData();
+    let rows = await fetchData();
+    DATA = processCSV(rows);
+    console.log(DATA);
 };
 
 function addEventListeners() {
@@ -66,7 +69,6 @@ function addYearChangeListener() {
 
 async function fetchData(){
     const filePath = `${window.location.origin}/static/data/battery_finder.csv`;
-    console.log(`CSV File: ${filePath}`);
     try {
         const response = await fetch(filePath);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -77,12 +79,40 @@ async function fetchData(){
         const rows = csvText.trim().split('\n').map(row => row.split(','));
         console.log('Parsed rows:', rows);
 
-        // You can now do something with `rows`, e.g. populate dropdowns
-        // displayCSV(rows); <-- optional
+        return rows;
     } catch (error) {
         console.error('Error loading CSV:', error);
+
+        return [];
     }
 }
+
+function processCSV(rows) {
+    const data = {};
+
+    for (let i = 1; i < rows.length; i++) { // skip header row
+        const [_, car_make, car_model, yom, rec_batt] = rows[i];
+
+        if (!data[car_make]) {
+            data[car_make] = {};
+        }
+
+        if (!data[car_make][car_model]) {
+            data[car_make][car_model] = {};
+        }
+
+        if (!data[car_make][car_model][yom]) {
+            data[car_make][car_model][yom] = [];
+        }
+
+        if (!data[car_make][car_model][yom].includes(rec_batt)) {
+            data[car_make][car_model][yom].push(rec_batt);
+        }
+    }
+
+    return data;
+}
+
 
 async function fetchCarMakes(){
     return fetch("http://41.139.158.69/api/battery-finder/car-makes")
