@@ -17,6 +17,13 @@ window.onload = async () => {
     showCarMakes();
 };
 
+window.addEventListener("message", (event) => {
+    // if (event.origin === "https://www.chlorideexide.com/") {
+        const receivedData = event.data;
+        console.log("Received from Wix:", receivedData);
+    // }
+});
+
 async function fetchData(){
     const filePath = `${window.location.origin}/static/data/battery_finder.csv`;
     try {
