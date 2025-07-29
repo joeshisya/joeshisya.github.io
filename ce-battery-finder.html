@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Battery Finder</title>
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
+
+<body>
+<h1>Battery Finder</h1>
+
+<label for="make">Car Make</label>
+<select id="make"> </select>
+
+<label for="model">Car Model</label>
+<select id="model" disabled> </select>
+
+<label for="year">Year of Manufacture</label>
+<select id="year" disabled> </select>
+
+<button class="btn hidden" onclick="showResult()">Find Battery</button>
+
+<div id="result">
+  <h3>Recommended Battery</h3>
+  <p id="battery-info">Loading...</p>
+</div>
+
+<script src="static/js/battery_finder.js"></script>
+
+</body>
+</html>

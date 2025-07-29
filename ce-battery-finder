@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Battery Finder</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f8fb;
+      color: #333;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #1f4cb0;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      border: 2px solid #1f4cb0;
+      border-radius: 5px;
+    }
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 2px solid #d1001c;
+      background-color: #fff;
+      border-radius: 6px;
+      display: none;
+    }
+    .btn {
+      margin-top: 2rem;
+      background-color: #1f4cb0;
+      color: white;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn:hover {
+      background-color: #163a8c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Battery Finder</h1>
+
+  <label for="make">Car Make</label>
+  <select id="make">
+    <option value="">-- Select Make --</option>
+    <option value="Toyota">Toyota</option>
+    <option value="Honda">Honda</option>
+    <option value="Nissan">Nissan</option>
+  </select>
+
+  <label for="model">Car Model</label>
+  <select id="model" disabled>
+    <option value="">-- Select Model --</option>
+  </select>
+
+  <label for="year">Year of Manufacture</label>
+  <select id="year" disabled>
+    <option value="">-- Select Year --</option>
+  </select>
+
+  <button class="btn" onclick="showResult()">Find Battery</button>
+
+  <div id="result">
+    <h3>Recommended Battery</h3>
+    <p id="battery-info">Loading...</p>
+  </div>
+
+  <script>
+    const data = {
+      "Toyota": {
+        "Corolla": {
+          "2020": "Amaron GO 45B20L",
+          "2021": "Exide Matrix 35L"
+        },
+        "Camry": {
+          "2019": "Amaron DIN60",
+          "2021": "Exide DIN74"
+        }
+      },
+      "Honda": {
+        "Civic": {
+          "2018": "Amaron PRO 45B20L",
+          "2020": "SF Sonic 38B20L"
+        },
+        "CR-V": {
+          "2021": "Amaron FLO 80D26L"
+        }
+      },
+      "Nissan": {
+        "X-Trail": {
+          "2020": "Exide Xpress XP1000",
+          "2022": "Amaron GO 95D26R"
+        }
+      }
+    };
+
+    const makeSelect = document.getElementById("make");
+    const modelSelect = document.getElementById("model");
+    const yearSelect = document.getElementById("year");
+    const batteryInfo = document.getElementById("battery-info");
+    const resultBox = document.getElementById("result");
+
+    makeSelect.addEventListener("change", () => {
+      const make = makeSelect.value;
+      modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
+      yearSelect.innerHTML = '<option value="">-- Select Year --</option>';
+      yearSelect.disabled = true;
+
+      if (make && data[make]) {
+        modelSelect.disabled = false;
+        Object.keys(data[make]).forEach(model => {
+          modelSelect.innerHTML += `<option value="${model}">${model}</option>`;
+        });
+      } else {
+        modelSelect.disabled = true;
+      }
+    });
+
+    modelSelect.addEventListener("change", () => {
+      const make = makeSelect.value;
+      const model = modelSelect.value;
+      yearSelect.innerHTML = '<option value="">-- Select Year --</option>';
+
+      if (model && data[make][model]) {
+        yearSelect.disabled = false;
+        Object.keys(data[make][model]).forEach(year => {
+          yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
+        });
+      } else {
+        yearSelect.disabled = true;
+      }
+    });
+
+    function showResult() {
+      const make = makeSelect.value;
+      const model = modelSelect.value;
+      const year = yearSelect.value;
+
+      if (!make || !model || !year) {
+        alert("Please select all fields.");
+        return;
+      }
+
+      const battery = data[make][model][year] || "No data available";
+      batteryInfo.textContent = `${make} ${model} (${year}): ${battery}`;
+      resultBox.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
