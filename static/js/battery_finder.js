@@ -23,7 +23,8 @@ window.addEventListener("message", (event) => {
         const receivedData = event.data;
         const products = receivedData.products;
         if(products){
-            console.log(`Products: ${products}`);
+            wix_products = products;
+            console.log(`Products: ${JSON.stringify(products[0])}`);
         }
     // }
 });
