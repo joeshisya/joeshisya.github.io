@@ -1,4 +1,5 @@
 let batteryFinderData = {};
+let wixProducts = [];
 const makeSelect = document.getElementById("make");
 const modelSelect = document.getElementById("model");
 const yearSelect = document.getElementById("year");
@@ -20,7 +21,10 @@ window.onload = async () => {
 window.addEventListener("message", (event) => {
     // if (event.origin === "https://www.chlorideexide.com/") {
         const receivedData = event.data;
-        console.log("Received from Wix:", receivedData);
+        const products = receivedData.products;
+        if(products){
+            console.log(`Products: ${products}`);
+        }
     // }
 });
 
