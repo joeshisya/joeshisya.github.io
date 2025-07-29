@@ -61,7 +61,7 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.205); /* semi-transparent dark background */
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,29 +73,117 @@ select {
   display: none !important;
 }
 
-/* Popup content box */
-.popup-content {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+/* === Popup Base === */
+.product-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-popup.hidden {
+  display: none;
+}
+
+.popup-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+}
+
+/* === Popup Box === */
+.popup-box {
   position: relative;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  width: 90%;
+  z-index: 1000;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 28px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* === Popup Content Layout === */
+.popup-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.popup-image img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+
+.popup-details {
+  flex: 1;
+}
+
+.popup-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popup-price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.popup-tax-note,
+.popup-sku {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.popup-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.popup-quantity button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.popup-quantity input {
+  width: 50px;
   text-align: center;
 }
 
-/* Close button */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
+.popup-cart-btn {
+  background-color: #516399;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
   cursor: pointer;
-  color: #555;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.close-btn:hover {
-  color: red;
+.popup-cart-btn:hover {
+  background-color: #3f4f7e;
 }
-

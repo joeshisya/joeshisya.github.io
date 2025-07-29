@@ -133,25 +133,41 @@ function showRecommendedBattery(make, model, year) {
 
 
 function showResult(batteryList) {
-    const batteryInfo = document.getElementById("battery-info");
-    const resultBox = document.getElementById("result");
-
     if (!batteryList || batteryList.length === 0) {
-        batteryInfo.textContent = "No recommended batteries found.";
-    } else {
-        batteryInfo.innerHTML = batteryList.map(battery => {
-            return `<div class="battery-item"><h4>${battery}</h4></div>`;
-        }).join("");
+        alert("No recommended batteries found.");
+        return;
     }
 
-    resultBox.classList.remove("hidden");
+    // For now, just use the first recommended battery
+    const battery = batteryList[0];
+
+    document.getElementById("popup-title").textContent = battery;
+    document.getElementById("popup-price").textContent = "Ksh 8,000.00"; // Dummy
+    document.getElementById("popup-sku").textContent = battery.replace(/\s/g, '').toUpperCase() + "-001";
+    document.getElementById("popup-qty").value = 1;
+
+    document.getElementById("battery-popup").classList.remove("hidden");
 }
 
 function closePopup() {
     document.getElementById("result").classList.add("hidden");
 }
 
+function increaseQty() {
+  let input = document.getElementById("popup-qty");
+  input.value = parseInt(input.value) + 1;
+}
 
+function decreaseQty() {
+  let input = document.getElementById("popup-qty");
+  if (parseInt(input.value) > 1) {
+    input.value = parseInt(input.value) - 1;
+  }
+}
+
+function closeProductPopup() {
+  document.getElementById("product-popup").classList.add("hidden");
+}
 
 
 function addEventListeners() {
