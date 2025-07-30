@@ -11,7 +11,7 @@ const recommendedBatteries = {
 const key = 'key-1261';
 
 window.onload = async () => {
-    console.log(key)
+    console.warn(key)
     addEventListeners();
     let rows = await fetchData();
     batteryFinderData = processCSV(rows);
@@ -24,7 +24,7 @@ window.addEventListener("message", (event) => {
         const products = receivedData.products;
         if(products){
             wix_products = products;
-            console.log(`Products: ${JSON.stringify(products[0])}`);
+            console.log(`Products: ${products.length}`);
         }
     // }
 });
@@ -151,6 +151,7 @@ function showResult(batteryList) {
 
     const battery = batteryList[0];
     let found = false;
+    console.log(`Before Search: ${wixProductsList.length}`);
     for(const product in wixProductsList){
         console.log(`Searching if ${battery} in ${product.name}`);
         if(product.name.contains(battery)){
@@ -159,6 +160,7 @@ function showResult(batteryList) {
         }
     }
 
+    console.log(`Found: ${found}`);
     document.getElementById("popup-title").textContent = battery;
     document.getElementById("popup-price").textContent = "";
     document.getElementById("popup-sku").textContent = "";
@@ -206,7 +208,6 @@ function addEventListeners() {
 function addMakeChangeListener() {
     makeSelect.addEventListener("change", async () => {
         const make = makeSelect.value;
-        console.log("Make changed to:", make);
         await showCarModels(make);
         modelSelect.value = "";
         yearSelect.value = "";
@@ -217,7 +218,6 @@ function addModelChangeListener() {
     modelSelect.addEventListener("change", () => {
         const make = makeSelect.value;
         const model = modelSelect.value;
-        console.log("Model changed to:", model);
         if (make && model) {
             yearSelect.disabled = false; // Enable year selection
             showYears(make, model);
@@ -234,12 +234,10 @@ function addYearChangeListener() {
         const make = makeSelect.value;
         const model = modelSelect.value;
         const year = yearSelect.value;
-        console.log("Year changed to:", year);
         if (make && model && year) {
-            console.log("Fetching recommended battery for:", make, model, year);
             showRecommendedBattery(make, model, year);
         } else {
-            console.log("Incomplete selection, clearing battery info.");
+            console.error("Incomplete selection, clearing battery info.");
             batteryInfo.textContent = "";
         }
     });
