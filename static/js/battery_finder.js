@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1261';
+const key = 'key-1263';
 
 window.onload = async () => {
     console.warn(key)
@@ -23,7 +23,7 @@ window.addEventListener("message", (event) => {
         const receivedData = event.data;
         const products = receivedData.products;
         if(products){
-            wix_products = products;
+            wixProductsList = products;
             console.log(`Products: ${products.length}`);
         }
     // }
