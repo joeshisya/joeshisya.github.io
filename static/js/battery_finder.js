@@ -153,7 +153,7 @@ function showResult(batteryList) {
     let found = false;
     console.log(`Before Search: ${wixProductsList.length}`);
     for(const product in wixProductsList){
-        console.log(`Searching if ${battery} in ${product.name}`);
+        console.log(`Searching if ${battery} in ${product}`);
         if(product.name.contains(battery)){
             found = true;
             break;
