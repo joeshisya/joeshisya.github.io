@@ -1,5 +1,5 @@
 let batteryFinderData = {};
-let wixProducts = [];
+let wixProductsList = [];
 const makeSelect = document.getElementById("make");
 const modelSelect = document.getElementById("model");
 const yearSelect = document.getElementById("year");
@@ -149,12 +149,26 @@ function showResult(batteryList) {
         return;
     }
 
-    // For now, just use the first recommended battery
     const battery = batteryList[0];
+    let found = false;
+    for(const product in wixProductsList){
+        console.log(`Searching if ${battery} in ${product.name}`);
+        if(product.name.contains(battery)){
+            found = true;
+            break;
+        }
+    }
 
     document.getElementById("popup-title").textContent = battery;
     document.getElementById("popup-price").textContent = "";
     document.getElementById("popup-sku").textContent = "";
+
+    if(found){
+        document.getElementById("popup-title").textContent = products.name;
+        document.getElementById("popup-price").textContent = product.formattedPrice;
+        document.getElementById("popup-sku").textContent = product.sku;
+    }
+
     // document.getElementById("popup-qty").value = 1;
 
     document.getElementById("product-popup").classList.remove("hidden");
