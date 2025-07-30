@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = '1259';
+const key = 'key-1261';
 
 window.onload = async () => {
     console.log(key)
@@ -167,13 +167,11 @@ function showResult(batteryList) {
         document.getElementById("popup-title").textContent = products.name;
         document.getElementById("popup-price").textContent = product.formattedPrice;
         document.getElementById("popup-sku").textContent = product.sku;
+        document.getElementById("popup-details-link").href = `https://www.chlorideexide.com${product.productPageUrl}`;
 
         const wixUrl = product.mainMedia;
-        // Extract the image ID from the wix:image:// URL
         const imageId = wixUrl.match(/wix:image:\/\/v1\/([^\/]+)/)[1];
-        // Construct the external URL
         const imageUrl = `https://static.wixstatic.com/media/${imageId}`;
-        // Assign it to the image element
         document.getElementById("popup-image").src = imageUrl;
     }
 
