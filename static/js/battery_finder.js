@@ -161,6 +161,7 @@ function showResult(batteryList) {
             }
         }
         catch(e){
+            console.log(e);
             break;
         }
     }
