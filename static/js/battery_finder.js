@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1265';
+const key = 'key-1267';
 
 window.onload = async () => {
     console.warn(key)
@@ -153,7 +153,7 @@ function showResult(batteryList) {
     let found = false;
     console.log(`Before Search: ${wixProductsList.length}`);
     for(const product of wixProductsList){
-        console.log(`Searching if ${battery} in ${product}`);
+        console.log(`Searching if ${battery} in ${product.name}`);
         try{
             if(product.name.contains(battery)){
                 found = true;
