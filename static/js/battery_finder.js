@@ -167,7 +167,7 @@ function showResult(batteryList) {
     }
 
     // TODO: Remove in live version
-    product = wixProductsList.length > 0 ? wixProductsList[0] : null;
+    // product = wixProductsList.length > 0 ? wixProductsList[0] : null;
 
     if(product !== null){
         document.getElementById("popup-title").textContent = product.name;
