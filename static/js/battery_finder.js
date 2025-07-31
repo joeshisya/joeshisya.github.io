@@ -9,7 +9,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1293';
+const key = 'key-1295';
 
 window.onload = async () => {
     addEventListeners();
