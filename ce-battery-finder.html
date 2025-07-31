@@ -8,51 +8,68 @@
 </head>
 
 <body>
-<h1>Battery Finder</h1>
+	<div class="battery-finder-content">
+		<div id="battery-finder">
+			<h1>Battery Finder</h1>
 
-<label for="make">Car Make</label>
-<select id="make"> </select>
+			<div class="input-group">
+				<label for="make">Car Make</label>
+				<select id="make"> </select>
+			</div>
 
-<label for="model">Car Model</label>
-<select id="model" disabled> </select>
+			<div class="input-group">
+				<label for="model">Car Model</label>
+				<select id="model" disabled> </select>
+			</div>
 
-<label for="year">Year of Manufacture</label>
-<select id="year" disabled> </select>
+			<div class="input-group">
+				<label for="year">Year of Manufacture</label>
+				<select id="year" disabled> </select>
+			</div>
 
-<!-- Battery Popup -->
-<div id="product-popup" class="product-popup hidden">
-  <div class="popup-overlay" onclick="closeProductPopup()"></div>
+			<div id="result" class="result hidden"></div>
+			<div id="go-to-shop" class="hidden">
+				<a id="shop-link" href="https://www.chlorideexide.com/category/all-products?Automotive=Automotive%2520Batteries">
+					Go To Shop
+				</a>
+			</div> 
+		</div>
 
-  <div class="popup-box">
-    <span class="close-btn" onclick="closeProductPopup()">&times;</span>
+		<!-- Battery Popup -->
+		<div id="product-popup" class="product-popup hidden">
+			<div class="popup-overlay" onclick="closeProductPopup()"></div>
 
-    <div class="popup-content">
-      <div class="popup-image">
-        <img src="" alt="" id="popup-image">
-      </div>
+			<div class="popup-box">
+				<span class="close-btn" onclick="closeProductPopup()">&times;</span>
 
-      <div class="popup-details">
-        <h2 id="popup-title"></h2>
-        <p class="popup-price" id="popup-price"></p>
-        <p class="popup-tax-note"></p>
-        <p class="popup-sku"><span id="popup-sku"></span></p>
+				<div class="popup-content">
+					<div class="popup-image">
+						<img src="" alt="" id="popup-image">
+					</div>
 
-        <!-- <label for="popup-qty">Quantity *</label>
-        <div class="popup-quantity">
-          <button onclick="decreaseQty()">−</button>
-          <input type="number" id="popup-qty" value="1" min="1">
-          <button onclick="increaseQty()">+</button>
-        </div> -->
+					<div class="popup-details">
+						<h2 id="popup-title"></h2>
+						<p class="popup-price" id="popup-price"></p>
+						<p class="popup-tax-note"></p>
+						<p class="popup-sku"><span id="popup-sku"></span></p>
 
-        <!-- <button class="popup-cart-btn">Add to Cart</button> -->
-        <p><a href="#" id="popup-details-link">View More Details</a></p>
-      </div>
-    </div>
-  </div>
-</div>
+						<!-- <label for="popup-qty">Quantity *</label>
+						<div class="popup-quantity">
+						<button onclick="decreaseQty()">−</button>
+						<input type="number" id="popup-qty" value="1" min="1">
+						<button onclick="increaseQty()">+</button>
+						</div> -->
+
+						<!-- <button class="popup-cart-btn">Add to Cart</button> -->
+						<p><a href="#" id="popup-details-link">View More Details</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-<script src="static/js/battery_finder.js"></script>
+		<script src="static/js/battery_finder.js"></script>
 
-</body>
+		</body>
+	</div>
 </html>

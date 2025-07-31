@@ -8,14 +8,14 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1271';
+const key = 'key-1273';
 
 window.onload = async () => {
-    console.warn(key)
     addEventListeners();
     let rows = await fetchData();
     batteryFinderData = processCSV(rows);
     showCarMakes();
+    debug();
 };
 
 window.addEventListener("message", (event) => {
@@ -150,13 +150,13 @@ function showResult(batteryList) {
     }
 
     const battery = batteryList[0];
-    let found = false;
-    console.log(`Before Search: ${wixProductsList.length}`);
+    let matchedProduct = null;
+    
     for(const product of wixProductsList){
         console.log(`Searching if ${battery} in ${product.name}`);
         try{
            if(product.name.toLowerCase().includes(battery.toLowerCase())) {
-                found = true;
+                matchedProduct = product;
                 break;
             }
         }
@@ -166,12 +166,10 @@ function showResult(batteryList) {
         }
     }
 
-    console.log(`Found: ${found}`);
-    document.getElementById("popup-title").textContent = battery;
-    document.getElementById("popup-price").textContent = "";
-    document.getElementById("popup-sku").textContent = "";
+    // TODO: Remove in live version
+    matchedProduct = wixProductsList.length > 0 ? wixProductsList[0] : null;
 
-    if(found){
+    if(matchedProduct !== null){
         document.getElementById("popup-title").textContent = products.name;
         document.getElementById("popup-price").textContent = product.formattedPrice;
         document.getElementById("popup-sku").textContent = product.sku;
@@ -181,11 +179,15 @@ function showResult(batteryList) {
         const imageId = wixUrl.match(/wix:image:\/\/v1\/([^\/]+)/)[1];
         const imageUrl = `https://static.wixstatic.com/media/${imageId}`;
         document.getElementById("popup-image").src = imageUrl;
+        document.getElementById("product-popup").classList.remove("hidden");
+    }
+    else {
+        document.getElementById("result").classList.remove("hidden").innerText = battery;
+        document.getElementById("go-to-shop").classList.remove("hidden");
     }
 
     // document.getElementById("popup-qty").value = 1;
 
-    document.getElementById("product-popup").classList.remove("hidden");
 }
 
 function increaseQty() {
@@ -247,4 +249,11 @@ function addYearChangeListener() {
             batteryInfo.textContent = "";
         }
     });
+}
+
+
+function debug(){
+    setInterval(function(){
+            console.log(`Key: ${key}`);
+    }, 5000);
 }
