@@ -163,19 +163,28 @@ function showResult(batteryList) {
 
     const battery = batteryList[0];
     let product = null;
-    
-    for(const wixProduct of wixProductsList){
-        console.log(`Searching if ${battery} in ${wixProduct.name}`);
-        try{
-           if(wixProduct.name.toLowerCase().includes(battery.toLowerCase())) {
-                product = wixProduct;
-                break;
+    let maxMatches = 0;
+    let bestMatch = null;
+
+    for (const wixProduct of wixProductsList) {
+        const productName = wixProduct.name.toLowerCase();
+        const batteryParts = battery.toLowerCase().split(" ");
+        let matchCount = 0;
+
+        for (const part of batteryParts) {
+            if (productName.includes(part)) {
+                matchCount++;
             }
         }
-        catch(e){
-            console.log(e);
-            break;
+
+        if (matchCount > maxMatches) {
+            maxMatches = matchCount;
+            bestMatch = wixProduct;
         }
+    }
+
+    if (bestMatch) {
+        product = bestMatch;
     }
 
     // TODO: Remove in live version
