@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1273';
+const key = 'key-1275';
 
 window.onload = async () => {
     addEventListeners();
@@ -170,7 +170,7 @@ function showResult(batteryList) {
     matchedProduct = wixProductsList.length > 0 ? wixProductsList[0] : null;
 
     if(matchedProduct !== null){
-        document.getElementById("popup-title").textContent = products.name;
+        document.getElementById("popup-title").textContent = product.name;
         document.getElementById("popup-price").textContent = product.formattedPrice;
         document.getElementById("popup-sku").textContent = product.sku;
         document.getElementById("popup-details-link").href = `https://www.chlorideexide.com${product.productPageUrl}`;
