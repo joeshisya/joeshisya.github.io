@@ -200,7 +200,7 @@ function showResult(batteryList) {
         resultDiv.classList.remove("hidden");
         resultDiv.innerText = `
                 <div class="product-card">
-                    <h3>Recommended Battery: ${product.name}</h3>
+                    <h3>Recommended Battery: ${battery}</h3>
                 </div>
             `;
         let goToShop = document.getElementById("go-to-shop");
