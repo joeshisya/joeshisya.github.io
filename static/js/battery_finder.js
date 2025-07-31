@@ -1,6 +1,7 @@
 let batteryFinderData = {};
 let wixProductsList = [];
 let hasMore = true;
+let strictMatch = false;
 const makeSelect = document.getElementById("make");
 const modelSelect = document.getElementById("model");
 const yearSelect = document.getElementById("year");
@@ -9,7 +10,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1297';
+const key = 'key-1299';
 
 window.onload = async () => {
     addEventListeners();
@@ -166,25 +167,38 @@ function showResult(batteryList) {
     let maxMatches = 0;
     let bestMatch = null;
 
-    for (const wixProduct of wixProductsList) {
-        const productName = wixProduct.name.toLowerCase();
-        const batteryParts = battery.toLowerCase().split(" ");
-        let matchCount = 0;
+    if(strictMatch){
+        for (const wixProduct of wixProductsList) {
+            const productName = wixProduct.name.toLowerCase();
+            const batteryParts = battery.toLowerCase().split(" ");
+            let matchCount = 0;
 
-        for (const part of batteryParts) {
-            if (productName.includes(part)) {
-                matchCount++;
+            for (const part of batteryParts) {
+                if (productName.includes(part)) {
+                    matchCount++;
+                }
+            }
+
+            if (matchCount > maxMatches) {
+                maxMatches = matchCount;
+                bestMatch = wixProduct;
             }
         }
 
-        if (matchCount > maxMatches) {
-            maxMatches = matchCount;
-            bestMatch = wixProduct;
+        if (bestMatch) {
+            product = bestMatch;
         }
     }
+    else {
+        const fuse = new Fuse(wixProductsList, {
+            keys: ['name'],
+            threshold: 0.4, // good starting point
+            });
 
-    if (bestMatch) {
-        product = bestMatch;
+            const result = fuse.search('DIN55MFL');
+            if (result.length > 0) {
+            product = result[0].item;
+        }
     }
 
     // TODO: Remove in live version
@@ -295,7 +309,7 @@ function debug(){
 
 function goToShop(){
     const shopLink = document.getElementById("shop-link");
-    shopLink.href = "https://www.chlorideexide.com/category/all-products?Automotive=Automotive%2520Batteries";
+    shopLink.href = "https://www.chlorideexide.com/category/all-products?Automotive+Batteries=All%2520Automotive%2520Batteries";
     window.open(shopLink.href);
 }
 
