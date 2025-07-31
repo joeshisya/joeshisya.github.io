@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1279';
+const key = 'key-1291';
 
 window.onload = async () => {
     addEventListeners();
@@ -173,7 +173,9 @@ function showResult(batteryList) {
         document.getElementById("popup-title").textContent = product.name;
         document.getElementById("popup-price").textContent = product.formattedPrice;
         document.getElementById("popup-sku").textContent = product.sku;
-        document.getElementById("popup-details-link").href = `https://www.chlorideexide.com${product.productPageUrl}`;
+        document.getElementById("popup-details-link").addEventListener("click", () => {
+            window.open(`https://www.chlorideexide.com${product.productPageUrl}`);
+        });
 
         const wixUrl = product.mainMedia;
         const imageId = wixUrl.match(/wix:image:\/\/v1\/([^\/]+)/)[1];
@@ -182,8 +184,11 @@ function showResult(batteryList) {
         document.getElementById("product-popup").classList.remove("hidden");
     }
     else {
-        document.getElementById("result").classList.remove("hidden").innerText = battery;
-        document.getElementById("go-to-shop").classList.remove("hidden");
+        let resultDiv = document.getElementById("result");
+        resultDiv.classList.remove("hidden");
+        resultDiv.innerText = battery;
+        let goToShop = document.getElementById("go-to-shop");
+        goToShop.classList.remove("hidden");
     }
 
     // document.getElementById("popup-qty").value = 1;
@@ -256,4 +261,14 @@ function debug(){
     setInterval(function(){
             console.log(`Key: ${key}`);
     }, 5000);
+}
+
+function goToShop(){
+    const shopLink = document.getElementById("shop-link");
+    shopLink.href = "https://www.chlorideexide.com/category/all-products?Automotive=Automotive%2520Batteries";
+    window.open(shopLink.href);
+}
+
+function openPage(link){
+    window.open(link);
 }
