@@ -9,7 +9,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1295';
+const key = 'key-1297';
 
 window.onload = async () => {
     addEventListeners();
@@ -151,8 +151,8 @@ function showResult(batteryList) {
         return;
     }
 
+    let resultDiv = document.getElementById("result");
     while(hasMore){
-        let resultDiv = document.getElementById("result");
         resultDiv.classList.remove("hidden");
         resultDiv.innerText = 'Fetching Result....';
     }
