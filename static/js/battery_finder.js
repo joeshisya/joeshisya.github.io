@@ -198,7 +198,11 @@ function showResult(batteryList) {
     else {
         let resultDiv = document.getElementById("result");
         resultDiv.classList.remove("hidden");
-        resultDiv.innerText = battery;
+        resultDiv.innerText = `
+                <div class="product-card">
+                    <h3>Recommended Battery: ${product.name}</h3>
+                </div>
+            `;
         let goToShop = document.getElementById("go-to-shop");
         goToShop.classList.remove("hidden");
     }
