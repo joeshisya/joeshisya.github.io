@@ -1,5 +1,6 @@
 let batteryFinderData = {};
 let wixProductsList = [];
+let hasMore = true;
 const makeSelect = document.getElementById("make");
 const modelSelect = document.getElementById("model");
 const yearSelect = document.getElementById("year");
@@ -22,8 +23,9 @@ window.addEventListener("message", (event) => {
     // if (event.origin === "https://www.chlorideexide.com/") {
         const receivedData = event.data;
         const products = receivedData.products;
+        hasMore = receivedData.has_more || false;
         if(products){
-            wixProductsList = products;
+            wixProductsList.push.apply(products);
             console.log(`Products: ${products.length}`);
         }
     // }
@@ -148,6 +150,16 @@ function showResult(batteryList) {
         alert("No recommended batteries found.");
         return;
     }
+
+    while(hasMore){
+        let resultDiv = document.getElementById("result");
+        resultDiv.classList.remove("hidden");
+        resultDiv.innerText = 'Fetching Result....';
+    }
+
+    resultDiv.classList.add("hidden");
+    resultDiv.innerText = '';
+
 
     const battery = batteryList[0];
     let product = null;
