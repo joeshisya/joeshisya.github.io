@@ -8,7 +8,7 @@ const resultBox = document.getElementById("result");
 
 const recommendedBatteries = {
 };
-const key = 'key-1277';
+const key = 'key-1279';
 
 window.onload = async () => {
     addEventListeners();
@@ -167,9 +167,9 @@ function showResult(batteryList) {
     }
 
     // TODO: Remove in live version
-    matchedProduct = wixProductsList.length > 0 ? wixProductsList[0] : null;
+    product = wixProductsList.length > 0 ? wixProductsList[0] : null;
 
-    if(matchedProduct !== null){
+    if(product !== null){
         document.getElementById("popup-title").textContent = product.name;
         document.getElementById("popup-price").textContent = product.formattedPrice;
         document.getElementById("popup-sku").textContent = product.sku;
